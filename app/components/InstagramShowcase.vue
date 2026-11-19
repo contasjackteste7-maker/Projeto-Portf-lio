@@ -1,58 +1,103 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from 'vue'
 
-const followerCount = ref(12980)
+const initialBase = 12980
+const followerCount = ref(initialBase)
+const gainedCount = ref(0)
 const isDeviceOn = ref(false)
 const sectionRef = ref<HTMLElement | null>(null)
 
 let observer: IntersectionObserver | null = null
+let growthTimer: any = null
+let animationFrameId: number | null = null
 
 const formatNumber = (num: number) => {
   return new Intl.NumberFormat('pt-BR').format(num)
 }
 
-const animateFollowers = () => {
-  const duration = 650
+const startContinuousGrowth = () => {
+  if (growthTimer) return
+
+  // Faz os seguidores crescerem ativamente ao vivo enquanto o usuário visualiza o perfil
+  growthTimer = setInterval(() => {
+    if (typeof document !== 'undefined' && document.hidden) return
+    // Incremento orgânico de novos seguidores (+1 a +3) a cada ~1.6 segundos
+    const step = Math.floor(Math.random() * 3) + 1
+    followerCount.value += step
+    gainedCount.value += step
+  }, 1600)
+}
+
+const animateInitialFollowers = () => {
+  const duration = 900
   const startTime = performance.now()
-  const startVal = 12750
-  const targetVal = 12980
-  
+  const startVal = 12820
+  const targetVal = initialBase
+
   const tick = (now: number) => {
     const elapsed = now - startTime
     const progress = Math.min(1, elapsed / duration)
-    followerCount.value = Math.floor(startVal + (targetVal - startVal) * progress)
+    const ease = 1 - Math.pow(1 - progress, 3)
+    followerCount.value = Math.floor(startVal + (targetVal - startVal) * ease)
     if (progress < 1) {
-      requestAnimationFrame(tick)
+      animationFrameId = requestAnimationFrame(tick)
+    } else {
+      followerCount.value = targetVal
+      startContinuousGrowth()
     }
   }
-  requestAnimationFrame(tick)
+  animationFrameId = requestAnimationFrame(tick)
 }
 
 const triggerPowerOn = () => {
   isDeviceOn.value = true
-  animateFollowers()
+  animateInitialFollowers()
+}
+
+const handleVisibilityChange = () => {
+  if (typeof document !== 'undefined' && document.hidden) {
+    if (growthTimer) {
+      clearInterval(growthTimer)
+      growthTimer = null
+    }
+  } else if (isDeviceOn.value && !growthTimer) {
+    startContinuousGrowth()
+  }
 }
 
 onMounted(() => {
-  if (import.meta.client && 'IntersectionObserver' in window) {
-    observer = new IntersectionObserver((entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting && !isDeviceOn.value) {
-          triggerPowerOn()
-        }
-      })
-    }, { threshold: 0.2 })
+  if (import.meta.client) {
+    document.addEventListener('visibilitychange', handleVisibilityChange)
 
-    if (sectionRef.value) {
-      observer.observe(sectionRef.value)
+    if ('IntersectionObserver' in window) {
+      observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (!isDeviceOn.value) {
+              triggerPowerOn()
+            } else if (!growthTimer) {
+              startContinuousGrowth()
+            }
+          }
+        })
+      }, { threshold: 0.15 })
+
+      if (sectionRef.value) {
+        observer.observe(sectionRef.value)
+      }
+    } else {
+      triggerPowerOn()
     }
-  } else {
-    triggerPowerOn()
   }
 })
 
 onUnmounted(() => {
   if (observer) observer.disconnect()
+  if (growthTimer) clearInterval(growthTimer)
+  if (animationFrameId) cancelAnimationFrame(animationFrameId)
+  if (typeof document !== 'undefined') {
+    document.removeEventListener('visibilitychange', handleVisibilityChange)
+  }
 })
 </script>
 
@@ -148,7 +193,15 @@ onUnmounted(() => {
 
               <div class="ig-stats">
                 <span><b>9</b> publicações</span>
-                <span class="ig-follower-stat"><b id="simFollowerCount">{{ formatNumber(followerCount) }}</b> seguidores</span>
+                <span class="ig-follower-stat">
+                  <b id="simFollowerCount">{{ formatNumber(followerCount) }}</b> seguidores
+                  <span v-if="gainedCount > 0" class="ig-growth" title="Crescimento contínuo ao vivo">
+                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M18 15l-6-6-6 6"/>
+                    </svg>
+                    <span>+{{ gainedCount }}</span>
+                  </span>
+                </span>
                 <span><b>386</b> seguindo</span>
               </div>
 

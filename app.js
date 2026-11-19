@@ -560,19 +560,42 @@ if(!reduced&&'IntersectionObserver' in window){
 
 const heroContact=document.querySelector('.hero [data-dialog]');if(heroContact)heroContact.onclick=()=>openDialog('Pedir orçamento','<p>Me conte sobre seu negócio e o vídeo que você tem em mente. Vamos conversar sobre formato, produção e orçamento.</p><p>Este é um contato demonstrativo. Seu WhatsApp ou e-mail poderá ser vinculado aqui.</p><a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="_3dJGfa_button _3dJGfa_light">Conversar no WhatsApp →</a>');
 
-// Illustrative follower count grows throughout this page visit; refresh resets it.
+// Illustrative follower count grows continuously throughout page visit
 (()=>{
- const count=document.querySelector('#simFollowerCount'),profile=document.querySelector('.ig-profile');
- if(!count||!profile)return;
- const initial=1284,format=new Intl.NumberFormat('pt-BR');
- let startedAt=null,visible=false,timer=null;
- function render(){if(startedAt===null)return;const steps=Math.floor((performance.now()-startedAt)/1000);count.textContent=format.format(initial+steps*17)}
- function sync(){
-  if(timer!==null){clearInterval(timer);timer=null}
-  if(visible&&!document.hidden){if(startedAt===null)startedAt=performance.now();render();timer=setInterval(render,1000)}
- }
- new IntersectionObserver(entries=>{visible=entries[0].isIntersecting;sync()},{threshold:.2}).observe(profile);
- document.addEventListener('visibilitychange',sync);
+  const count = document.querySelector('#simFollowerCount');
+  const growth = document.querySelector('#simFollowerGrowth');
+  const profile = document.querySelector('.ig-profile');
+  if (!count || !profile) return;
+  const initial = 12980, format = new Intl.NumberFormat('pt-BR');
+  let currentCount = initial, gained = 0, visible = false, timer = null;
+
+  function stepGrowth() {
+    if (document.hidden || !visible) return;
+    const inc = Math.floor(Math.random() * 3) + 1;
+    currentCount += inc;
+    gained += inc;
+    count.textContent = format.format(currentCount);
+    if (growth) {
+      growth.style.display = 'inline-flex';
+      const span = growth.querySelector('span');
+      if (span) span.textContent = `+${gained}`;
+    }
+  }
+
+  function sync() {
+    if (timer !== null) { clearInterval(timer); timer = null; }
+    if (visible && !document.hidden) {
+      stepGrowth();
+      timer = setInterval(stepGrowth, 1600);
+    }
+  }
+
+  new IntersectionObserver(entries => {
+    visible = entries[0].isIntersecting;
+    sync();
+  }, { threshold: 0.15 }).observe(profile);
+
+  document.addEventListener('visibilitychange', sync);
 })();
 
 // --- Frame Authentic Video Niches Reel (Raycast Style) ---

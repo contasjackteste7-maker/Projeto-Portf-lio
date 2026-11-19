@@ -111,7 +111,7 @@ const onVideoEnded = (index: number) => {
     <div class="video-gallery-header">
       <div class="video-gallery-kicker reveal-blur">
         <span class="section-label">PRODUÇÕES ENTREGUES</span>
-        <h2>Vídeos que já produzi.</h2>
+        <h2>Alguns vídeos que já produzi.</h2>
         <p class="research-copy">Veja o resultado na prática.</p>
       </div>
     </div>
