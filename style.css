@@ -1028,14 +1028,77 @@ dialog{background:#191919;color:#f5f5f5}dialog::backdrop{background:#000c}#dialo
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.7);
 }
 
-.video-grid-card.is-playing .screen-play-btn {
-  opacity: 0;
-  transition: opacity 0.25s ease;
+.video-grid-card.is-playing .screen-play-container,
+.video-grid-card.is-playing .screen-play-btn,
+.video-grid-card.is-playing:hover .screen-play-btn,
+.video-grid-card.is-buffering .screen-play-container,
+.video-grid-card.is-buffering .screen-play-btn {
+  display: none !important;
+  opacity: 0 !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
 }
 
-.video-grid-card.is-playing:hover .screen-play-btn {
-  opacity: 0.9;
+/* Esconder duracao, acoes laterais e textos inferiores (deixar somente o som) */
+.video-grid-card .hud-time,
+.video-grid-card .screen-reels-actions,
+.video-grid-card .screen-hud-bottom {
+  display: none !important;
 }
+
+/* Indicador de carregamento em cubos (Uiverse.io por ZacharyCrespin) no centro do video */
+.video-grid-card .video-card-loader {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(0.48);
+  z-index: 6;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 96px;
+  height: 96px;
+}
+
+/* Somente o indicador verdinho de som no canto inferior direito */
+.video-grid-card .screen-sound-hud {
+  position: absolute;
+  bottom: 14px;
+  right: 14px;
+  z-index: 4;
+  background: rgba(0, 0, 0, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  border-radius: 12px;
+  padding: 6px 9px;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-grid-card .screen-sound-hud .wave-bars {
+  display: inline-flex;
+  align-items: flex-end;
+  gap: 2.5px;
+  height: 12px;
+}
+
+.video-grid-card .screen-sound-hud .wave-bars span {
+  width: 2.5px;
+  background: #2ed469;
+  border-radius: 2px;
+  height: 4px;
+  box-shadow: 0 0 6px rgba(46, 212, 105, 0.6);
+}
+
+.video-grid-card.is-playing .screen-sound-hud .wave-bars span {
+  animation: waveBounce 0.8s ease-in-out infinite alternate;
+}
+.video-grid-card.is-playing .screen-sound-hud .wave-bars span:nth-child(2) { animation-delay: 0.15s; }
+.video-grid-card.is-playing .screen-sound-hud .wave-bars span:nth-child(3) { animation-delay: 0.3s; }
+.video-grid-card.is-playing .screen-sound-hud .wave-bars span:nth-child(4) { animation-delay: 0.45s; }
 
 .video-grid-card .screen-play-btn svg {
   width: 22px;

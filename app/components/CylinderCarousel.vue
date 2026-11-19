@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue'
 import { frameNicheCategoriesData, corporateVideos, type NicheCardItem } from '~/data/videos'
-import { getCachedVideoUrl, preloadVideoList } from '~/utils/videoCache'
 
 const nicheCategoriesOrder = ['institucional', 'reels', 'produtos', 'eventos']
 const allNicheCards: NicheCardItem[] = []
@@ -18,25 +17,11 @@ nicheCategoriesOrder.forEach((catKey) => {
 
 const TOTAL_NICHE_CARDS = allNicheCards.length // 12
 const trackRef = ref<HTMLElement | null>(null)
-const cachedVideoMap = ref<Record<string, string>>({})
 
 onMounted(() => {
   if (trackRef.value) {
     trackRef.value.style.setProperty('--n', String(TOTAL_NICHE_CARDS))
   }
-
-  // Carrega ou recupera cada vídeo do Cache Storage persistente do navegador
-  allNicheCards.forEach(async (card) => {
-    if (card.video) {
-      const blobUrl = await getCachedVideoUrl(card.video)
-      if (blobUrl && blobUrl !== card.video) {
-        cachedVideoMap.value[card.video] = blobUrl
-      }
-    }
-  })
-
-  // Em segundo plano (idle), já faz o cache dos vídeos da galeria para ficarem instantâneos
-  preloadVideoList(corporateVideos.map(v => v.video))
 })
 </script>
 
@@ -74,7 +59,7 @@ onMounted(() => {
         >
           <video
             class="niche-full-video"
-            :src="cachedVideoMap[card.video || ''] || card.video"
+            :src="card.video"
             :poster="card.poster"
             autoplay
             muted

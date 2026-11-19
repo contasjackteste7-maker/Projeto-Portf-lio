@@ -333,7 +333,7 @@ function createVideoCardElement(item, index, delay) {
       </video>
       <div class="card-media-overlay"></div>
 
-      <!-- Top Reels HUD -->
+      <!-- Top Reels HUD: Instagram Button -->
       <div class="screen-hud-top">
         <a href="${item.instagramUrl || 'https://www.instagram.com/'}" target="_blank" rel="noopener noreferrer" class="hud-tag hud-instagram-btn" title="Abrir vídeo no Instagram" onclick="event.stopPropagation()">
           <svg class="hud-ig-icon" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
@@ -346,51 +346,34 @@ function createVideoCardElement(item, index, delay) {
             <path d="M7 17l9.2-9.2M17 17V8H8"/>
           </svg>
         </a>
-        <span class="hud-time">${item.duration}</span>
       </div>
 
-      <!-- Center Play Button (Clean glassmorphic, no glow) -->
+      <!-- Center Buffer Loader (ZacharyCrespin Cube Animation) -->
+      <div class="video-card-loader" style="display:none" aria-hidden="true">
+        <div class="loader">
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+        </div>
+      </div>
+
+      <!-- Center Play Button (Sumir quando estiver reproduzindo ou carregando) -->
       <div class="screen-play-container">
         <button class="screen-play-btn" type="button" aria-label="Assistir ${item.title}">
           <svg class="play-icon" viewBox="0 0 24 24">
             <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.5-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/>
           </svg>
-          <svg class="pause-icon" viewBox="0 0 24 24" style="display:none">
-            <path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
-          </svg>
         </button>
       </div>
 
-      <!-- Floating Instagram Reels Actions -->
-      <div class="screen-reels-actions">
-        <div class="reels-action-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
-          <span>${item.likes}</span>
-        </div>
-        <div class="reels-action-item">
-          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20 2H4c-1.1 0-2 .9-2 2v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"/></svg>
-          <span>${item.comments}</span>
-        </div>
-        <div class="reels-action-item">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 2-7 20-4-9-9-4 20-7z"/></svg>
-        </div>
-      </div>
-
-      <!-- Bottom HUD: Author, Title, Description, Equalizer -->
-      <div class="screen-hud-bottom">
-        <div class="screen-author">
-          <span class="author-avatar">${authorInitial}</span>
-          <strong>${clientHandle}</strong>
-          <span class="verified-badge">✓</span>
-        </div>
-        <h3 class="screen-title">${item.title}</h3>
-        <p class="screen-desc">${item.desc}</p>
-        <div class="audio-wave-bar">
-          <span class="wave-icon">♫</span>
-          <span class="wave-track">Áudio original • Som imersivo</span>
-          <div class="wave-bars">
-            <span></span><span></span><span></span><span></span>
-          </div>
+      <!-- Bottom Right: Somente o Indicador Verdinho de Som -->
+      <div class="screen-sound-hud">
+        <div class="wave-bars">
+          <span></span><span></span><span></span><span></span>
         </div>
       </div>
 
@@ -402,10 +385,21 @@ function createVideoCardElement(item, index, delay) {
   `;
 
   const video = card.querySelector('video');
+  const playContainer = card.querySelector('.screen-play-container');
   const playBtn = card.querySelector('.screen-play-btn');
-  const playIcon = card.querySelector('.play-icon');
-  const pauseIcon = card.querySelector('.pause-icon');
+  const loaderEl = card.querySelector('.video-card-loader');
   const progressFill = card.querySelector('.screen-progress-fill');
+
+  function showLoader() {
+    if (loaderEl) loaderEl.style.display = 'flex';
+    if (playContainer) playContainer.style.display = 'none';
+    card.classList.add('is-buffering');
+  }
+
+  function hideLoader() {
+    if (loaderEl) loaderEl.style.display = 'none';
+    card.classList.remove('is-buffering');
+  }
 
   function togglePlay(event) {
     if (event) event.stopPropagation();
@@ -413,52 +407,79 @@ function createVideoCardElement(item, index, delay) {
 
     if (isCurrentlyPlaying) {
       video.pause();
-      card.classList.remove('is-playing');
-      playIcon.style.display = 'block';
-      pauseIcon.style.display = 'none';
+      card.classList.remove('is-playing', 'is-buffering');
+      hideLoader();
+      if (playContainer) playContainer.style.display = 'block';
     } else {
       document.querySelectorAll('.video-grid-card.is-playing').forEach(otherCard => {
         if (otherCard !== card) {
           const otherVideo = otherCard.querySelector('video');
           if (otherVideo) otherVideo.pause();
-          otherCard.classList.remove('is-playing');
-          const otherPlayIcon = otherCard.querySelector('.play-icon');
-          const otherPauseIcon = otherCard.querySelector('.pause-icon');
-          if (otherPlayIcon) otherPlayIcon.style.display = 'block';
-          if (otherPauseIcon) otherPauseIcon.style.display = 'none';
+          otherCard.classList.remove('is-playing', 'is-buffering');
+          const otherPlay = otherCard.querySelector('.screen-play-container');
+          const otherLoader = otherCard.querySelector('.video-card-loader');
+          if (otherPlay) otherPlay.style.display = 'block';
+          if (otherLoader) otherLoader.style.display = 'none';
         }
       });
+
+      card.classList.add('is-playing');
+      if (playContainer) playContainer.style.display = 'none';
+
+      if (video.readyState < 3) {
+        showLoader();
+      }
 
       video.muted = false;
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          card.classList.add('is-playing');
-          playIcon.style.display = 'none';
-          pauseIcon.style.display = 'block';
+          hideLoader();
         }).catch(() => {
           video.muted = true;
           video.play().then(() => {
-            card.classList.add('is-playing');
-            playIcon.style.display = 'none';
-            pauseIcon.style.display = 'block';
-          }).catch(() => {});
+            hideLoader();
+          }).catch(() => {
+            hideLoader();
+            card.classList.remove('is-playing');
+            if (playContainer) playContainer.style.display = 'block';
+          });
         });
       }
     }
   }
+
+  video.addEventListener('waiting', () => {
+    if (card.classList.contains('is-playing')) {
+      showLoader();
+    }
+  });
+
+  video.addEventListener('playing', () => {
+    hideLoader();
+    if (playContainer) playContainer.style.display = 'none';
+  });
+
+  video.addEventListener('canplay', () => {
+    if (card.classList.contains('is-playing')) {
+      hideLoader();
+    }
+  });
 
   video.addEventListener('timeupdate', () => {
     if (video.duration) {
       const pct = (video.currentTime / video.duration) * 100;
       progressFill.style.width = `${pct}%`;
     }
+    if (card.classList.contains('is-playing') && video.currentTime > 0) {
+      hideLoader();
+    }
   });
 
   video.addEventListener('ended', () => {
-    card.classList.remove('is-playing');
-    playIcon.style.display = 'block';
-    pauseIcon.style.display = 'none';
+    card.classList.remove('is-playing', 'is-buffering');
+    hideLoader();
+    if (playContainer) playContainer.style.display = 'block';
     progressFill.style.width = '0%';
   });
 
@@ -1122,30 +1143,6 @@ if (niche3dTrack && niche3dScene) {
       cardVideo.play().catch(() => {});
     }
   });
-
-  // Client-side Video Cache Storage: salva vídeos em disco para carregamento instantâneo em reloads
-  if ('caches' in window) {
-    const CACHE_NAME = 'frame-video-cache-v1';
-    sampleVideos.forEach(async (url, idx) => {
-      try {
-        const cache = await caches.open(CACHE_NAME);
-        let res = await cache.match(url);
-        if (!res) {
-          res = await fetch(url);
-          if (res && res.ok) cache.put(url, res.clone()).catch(() => {});
-        }
-        if (res && res.ok) {
-          const blob = await res.blob();
-          const objUrl = URL.createObjectURL(blob);
-          const videoEl = allNicheCardElements[idx]?.querySelector('.niche-full-video');
-          if (videoEl && videoEl.src !== objUrl) {
-            videoEl.src = objUrl;
-            videoEl.play().catch(() => {});
-          }
-        }
-      } catch (e) {}
-    });
-  }
 }
 
   // Initial setup: start at angle 0 facing front
