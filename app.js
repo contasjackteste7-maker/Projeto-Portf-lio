@@ -325,9 +325,7 @@ function createVideoCardElement(item, index, delay) {
 
   card.innerHTML = `
     <div class="card-screen-frame">
-      <div class="card-poster-art" style="background: ${item.artGradient};">
-        <div class="poster-lens-flare" style="background: ${item.flare};"></div>
-      </div>
+      <img src="${item.poster}" alt="${item.title}" class="card-poster-thumb" loading="lazy">
       <video class="video-grid-player" poster="${item.poster}" muted loop playsinline preload="metadata">
         <source src="${item.video}" type="video/mp4">
       </video>
@@ -348,24 +346,26 @@ function createVideoCardElement(item, index, delay) {
         </a>
       </div>
 
-      <!-- Center Buffer Loader (ZacharyCrespin Cube Animation) -->
+      <!-- Center Buffer Loader: Animação dos cubos na frente da miniatura -->
       <div class="video-card-loader" style="display:none" aria-hidden="true">
-        <div class="loader">
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
-          <div class="loader-square"></div>
+        <div class="video-card-loader-badge">
+          <div class="loader">
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+            <div class="loader-square"></div>
+          </div>
         </div>
       </div>
 
-      <!-- Center Play Button (Sumir quando estiver reproduzindo ou carregando) -->
+      <!-- Center Play Button (Botão de Play Premium Glassmorphism) -->
       <div class="screen-play-container">
         <button class="screen-play-btn" type="button" aria-label="Assistir ${item.title}">
-          <svg class="play-icon" viewBox="0 0 24 24">
-            <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.5-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/>
+          <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M8.5 5.75c0-.98 1.07-1.58 1.91-1.07l9.88 5.99c.79.48.79 1.66 0 2.14l-9.88 5.99c-.84.51-1.91-.09-1.91-1.07V5.75z"/>
           </svg>
         </button>
       </div>
@@ -401,29 +401,36 @@ function createVideoCardElement(item, index, delay) {
     card.classList.remove('is-buffering');
   }
 
+  function markActivePlaying() {
+    card.classList.add('is-active-playing');
+    hideLoader();
+    if (playContainer) playContainer.style.display = 'none';
+  }
+
   function togglePlay(event) {
     if (event) event.stopPropagation();
     const isCurrentlyPlaying = card.classList.contains('is-playing');
 
     if (isCurrentlyPlaying) {
       video.pause();
-      card.classList.remove('is-playing', 'is-buffering');
+      card.classList.remove('is-playing', 'is-active-playing', 'is-buffering');
       hideLoader();
-      if (playContainer) playContainer.style.display = 'block';
+      if (playContainer) playContainer.style.display = 'flex';
     } else {
       document.querySelectorAll('.video-grid-card.is-playing').forEach(otherCard => {
         if (otherCard !== card) {
           const otherVideo = otherCard.querySelector('video');
           if (otherVideo) otherVideo.pause();
-          otherCard.classList.remove('is-playing', 'is-buffering');
+          otherCard.classList.remove('is-playing', 'is-active-playing', 'is-buffering');
           const otherPlay = otherCard.querySelector('.screen-play-container');
           const otherLoader = otherCard.querySelector('.video-card-loader');
-          if (otherPlay) otherPlay.style.display = 'block';
+          if (otherPlay) otherPlay.style.display = 'flex';
           if (otherLoader) otherLoader.style.display = 'none';
         }
       });
 
       card.classList.add('is-playing');
+      card.classList.remove('is-active-playing');
       if (playContainer) playContainer.style.display = 'none';
 
       if (video.readyState < 3) {
@@ -434,15 +441,15 @@ function createVideoCardElement(item, index, delay) {
       const playPromise = video.play();
       if (playPromise !== undefined) {
         playPromise.then(() => {
-          hideLoader();
+          markActivePlaying();
         }).catch(() => {
           video.muted = true;
           video.play().then(() => {
-            hideLoader();
+            markActivePlaying();
           }).catch(() => {
             hideLoader();
-            card.classList.remove('is-playing');
-            if (playContainer) playContainer.style.display = 'block';
+            card.classList.remove('is-playing', 'is-active-playing');
+            if (playContainer) playContainer.style.display = 'flex';
           });
         });
       }
@@ -456,13 +463,12 @@ function createVideoCardElement(item, index, delay) {
   });
 
   video.addEventListener('playing', () => {
-    hideLoader();
-    if (playContainer) playContainer.style.display = 'none';
+    markActivePlaying();
   });
 
   video.addEventListener('canplay', () => {
-    if (card.classList.contains('is-playing')) {
-      hideLoader();
+    if (card.classList.contains('is-playing') && video.currentTime > 0) {
+      markActivePlaying();
     }
   });
 
@@ -472,14 +478,14 @@ function createVideoCardElement(item, index, delay) {
       progressFill.style.width = `${pct}%`;
     }
     if (card.classList.contains('is-playing') && video.currentTime > 0) {
-      hideLoader();
+      markActivePlaying();
     }
   });
 
   video.addEventListener('ended', () => {
-    card.classList.remove('is-playing', 'is-buffering');
+    card.classList.remove('is-playing', 'is-active-playing', 'is-buffering');
     hideLoader();
-    if (playContainer) playContainer.style.display = 'block';
+    if (playContainer) playContainer.style.display = 'flex';
     progressFill.style.width = '0%';
   });
 

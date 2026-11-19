@@ -5,6 +5,7 @@ import { corporateVideos, type CorporateVideo } from '~/data/videos'
 const BATCH_SIZE = 6
 const loadedCount = ref(BATCH_SIZE)
 const playingIndex = ref<number | null>(null)
+const activePlayingIndex = ref<number | null>(null)
 const bufferingIndex = ref<number | null>(null)
 const progressMap = ref<Record<number, string>>({})
 const videoElementRefs = ref<HTMLVideoElement[]>([])
@@ -24,6 +25,7 @@ const togglePlay = (index: number) => {
   if (playingIndex.value === index) {
     video.pause()
     playingIndex.value = null
+    activePlayingIndex.value = null
     bufferingIndex.value = null
   } else {
     // Pause any other playing video
@@ -32,6 +34,7 @@ const togglePlay = (index: number) => {
     }
 
     playingIndex.value = index
+    activePlayingIndex.value = null
 
     // Se o vídeo ainda não carregou frames suficientes, exibe o loader imediatamente
     if (video.readyState < 3) {
@@ -44,6 +47,7 @@ const togglePlay = (index: number) => {
       playPromise
         .then(() => {
           bufferingIndex.value = null
+          activePlayingIndex.value = index
         })
         .catch(() => {
           // Fallback para reprodução muda se o navegador bloquear áudio automático
@@ -51,9 +55,12 @@ const togglePlay = (index: number) => {
           video.play()
             .then(() => {
               bufferingIndex.value = null
+              activePlayingIndex.value = index
             })
             .catch(() => {
               bufferingIndex.value = null
+              playingIndex.value = null
+              activePlayingIndex.value = null
             })
         })
     }
@@ -69,6 +76,7 @@ const onWaiting = (index: number) => {
 const onPlaying = (index: number) => {
   if (playingIndex.value === index) {
     bufferingIndex.value = null
+    activePlayingIndex.value = index
   }
 }
 
@@ -78,14 +86,20 @@ const onTimeUpdate = (index: number, e: Event) => {
     const pct = (video.currentTime / video.duration) * 100
     progressMap.value[index] = `${pct}%`
   }
-  if (playingIndex.value === index && bufferingIndex.value === index) {
-    bufferingIndex.value = null
+  if (playingIndex.value === index) {
+    if (bufferingIndex.value === index) {
+      bufferingIndex.value = null
+    }
+    if (video && video.currentTime > 0) {
+      activePlayingIndex.value = index
+    }
   }
 }
 
 const onVideoEnded = (index: number) => {
   if (playingIndex.value === index) {
     playingIndex.value = null
+    activePlayingIndex.value = null
     bufferingIndex.value = null
   }
   progressMap.value[index] = '0%'
@@ -109,6 +123,7 @@ const onVideoEnded = (index: number) => {
         class="video-grid-card"
         :class="{
           'is-playing': playingIndex === index,
+          'is-active-playing': activePlayingIndex === index,
           'is-buffering': bufferingIndex === index
         }"
         :style="{
@@ -120,9 +135,15 @@ const onVideoEnded = (index: number) => {
         @click="togglePlay(index)"
       >
         <div class="card-screen-frame">
-          <div class="card-poster-art" :style="{ background: item.artGradient }">
-            <div class="poster-lens-flare" :style="{ background: item.flare }"></div>
-          </div>
+          <!-- Miniatura oficial fixa que nunca some no carregamento -->
+          <img
+            :src="item.poster"
+            :alt="item.title"
+            class="card-poster-thumb"
+            :class="{ 'is-faded': activePlayingIndex === index }"
+            loading="lazy"
+          />
+
           <video
             :ref="(el) => { if (el) videoElementRefs[index] = el as HTMLVideoElement }"
             class="video-grid-player"
@@ -162,20 +183,22 @@ const onVideoEnded = (index: number) => {
             </a>
           </div>
 
-          <!-- Center Buffer Loader (ZacharyCrespin Cube Loader from Site Preloader) -->
+          <!-- Center Buffer Loader: Animação de cubos na frente da miniatura -->
           <div v-if="bufferingIndex === index" class="video-card-loader" aria-hidden="true">
-            <div class="loader">
-              <div class="loader-square"></div>
-              <div class="loader-square"></div>
-              <div class="loader-square"></div>
-              <div class="loader-square"></div>
-              <div class="loader-square"></div>
-              <div class="loader-square"></div>
-              <div class="loader-square"></div>
+            <div class="video-card-loader-badge">
+              <div class="loader">
+                <div class="loader-square"></div>
+                <div class="loader-square"></div>
+                <div class="loader-square"></div>
+                <div class="loader-square"></div>
+                <div class="loader-square"></div>
+                <div class="loader-square"></div>
+                <div class="loader-square"></div>
+              </div>
             </div>
           </div>
 
-          <!-- Center Play Button (Sumir quando estiver reproduzindo ou carregando) -->
+          <!-- Center Play Button (Botão de Play Premium Glassmorphism) -->
           <div
             v-show="playingIndex !== index && bufferingIndex !== index"
             class="screen-play-container"
@@ -186,8 +209,8 @@ const onVideoEnded = (index: number) => {
               :aria-label="`Assistir ${item.title}`"
               @click.stop="togglePlay(index)"
             >
-              <svg class="play-icon" viewBox="0 0 24 24">
-                <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.5-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/>
+              <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M8.5 5.75c0-.98 1.07-1.58 1.91-1.07l9.88 5.99c.79.48.79 1.66 0 2.14l-9.88 5.99c-.84.51-1.91-.09-1.91-1.07V5.75z"/>
               </svg>
             </button>
           </div>
