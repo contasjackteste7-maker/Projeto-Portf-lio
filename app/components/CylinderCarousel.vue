@@ -57,6 +57,10 @@ onMounted(() => {
             '--i': i
           }"
         >
+          <!-- Miniatura oficial de alta definição imediata (garante que o card nunca fique preto ao carregar) -->
+          <img :src="card.poster" class="niche-card-poster" :alt="card.title" loading="eager" />
+
+          <!-- Vídeo otimizado em loop contínuo sem reinícios abruptos -->
           <video
             class="niche-full-video"
             :src="card.video"
@@ -65,9 +69,12 @@ onMounted(() => {
             muted
             loop
             playsinline
-            preload="auto"
-            @loadeddata="(e) => (e.target as HTMLVideoElement).play().catch(() => {})"
+            preload="metadata"
           ></video>
+
+          <div class="niche-card-overlay">
+            <span class="niche-card-title">{{ card.title }}</span>
+          </div>
         </article>
       </div>
     </div>

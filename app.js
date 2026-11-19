@@ -346,26 +346,24 @@ function createVideoCardElement(item, index, delay) {
         </a>
       </div>
 
-      <!-- Center Buffer Loader: Animação dos cubos na frente da miniatura -->
+      <!-- Center Buffer Loader: Apenas os cubos, sem borda ao redor -->
       <div class="video-card-loader" style="display:none" aria-hidden="true">
-        <div class="video-card-loader-badge">
-          <div class="loader">
-            <div class="loader-square"></div>
-            <div class="loader-square"></div>
-            <div class="loader-square"></div>
-            <div class="loader-square"></div>
-            <div class="loader-square"></div>
-            <div class="loader-square"></div>
-            <div class="loader-square"></div>
-          </div>
+        <div class="loader">
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
+          <div class="loader-square"></div>
         </div>
       </div>
 
-      <!-- Center Play Button (Botão de Play Premium Glassmorphism) -->
+      <!-- Center Play Button (Normal, sem borda) -->
       <div class="screen-play-container">
         <button class="screen-play-btn" type="button" aria-label="Assistir ${item.title}">
           <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M8.5 5.75c0-.98 1.07-1.58 1.91-1.07l9.88 5.99c.79.48.79 1.66 0 2.14l-9.88 5.99c-.84.51-1.91-.09-1.91-1.07V5.75z"/>
+            <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.5-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/>
           </svg>
         </button>
       </div>
@@ -1159,7 +1157,11 @@ if (niche3dTrack && niche3dScene) {
     const posterSrc = samplePosters[i % samplePosters.length];
 
     card.innerHTML = `
-      <video class="niche-full-video" src="${videoSrc}" poster="${posterSrc}" autoplay muted loop playsinline preload="auto"></video>
+      <img src="${posterSrc}" class="niche-card-poster" alt="" loading="eager">
+      <video class="niche-full-video" src="${videoSrc}" poster="${posterSrc}" autoplay muted loop playsinline preload="metadata"></video>
+      <div class="niche-card-overlay">
+        <span class="niche-card-title">${cardData.title}</span>
+      </div>
     `;
 
     niche3dTrack.appendChild(card);
