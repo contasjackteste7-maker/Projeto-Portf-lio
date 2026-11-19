@@ -95,7 +95,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "AssisNet",
     clientHandle: "@assisnet",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DbOhwF_oWp8/",
     likes: "2.4k",
     comments: "142"
   },
@@ -114,7 +114,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "AssisNet",
     clientHandle: "@assisnet",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DfXins6zCvr/",
     likes: "3.8k",
     comments: "286"
   },
@@ -133,7 +133,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Evento Summit",
     clientHandle: "@summitbrasil",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DY715pnpOU3/",
     likes: "1.9k",
     comments: "98"
   },
@@ -152,7 +152,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Bastidores Pro",
     clientHandle: "@bastidores",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DcZmC5UhD_O/",
     likes: "1.2k",
     comments: "64"
   },
@@ -171,7 +171,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Case Sucesso",
     clientHandle: "@casesucesso",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DU50AFvEalM/",
     likes: "2.1k",
     comments: "115"
   },
@@ -190,7 +190,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Impacto Reels",
     clientHandle: "@impactoreels",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DdUu-rOB7Of/",
     likes: "5.4k",
     comments: "420"
   },
@@ -209,7 +209,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Sede Corporativa",
     clientHandle: "@corporativo",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DbbqplHBgvE/",
     likes: "1.7k",
     comments: "82"
   },
@@ -228,7 +228,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Assistech",
     clientHandle: "@assistech",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DfQb3N_x32C/",
     likes: "3.2k",
     comments: "194"
   },
@@ -247,7 +247,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Time & Cultura",
     clientHandle: "@cultura",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/Dc14JmYRSNC/",
     likes: "1.5k",
     comments: "91"
   },
@@ -266,7 +266,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Assistech",
     clientHandle: "@assistech",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DbmFLtyRiT4/",
     likes: "2.8k",
     comments: "163"
   },
@@ -285,7 +285,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Transformação",
     clientHandle: "@transformacao",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
+    instagramUrl: "https://www.instagram.com/reel/DaxiLqxRnJS/",
     likes: "4.1k",
     comments: "250"
   },
@@ -304,18 +304,7 @@ export const corporateVideos: CorporateVideo[] = [
     clientName: "Festa & Celebração",
     clientHandle: "@aftermovie",
     clientLogo: "",
-    instagramUrl: "https://www.instagram.com/",
-    video: b2Videos[11],
-    poster: realPosters[11],
-    duration: "0:55",
-    glow: "rgba(170, 20, 160, 0.45)",
-    accent: "#c724b1",
-    artGradient: "linear-gradient(145deg, #240822 0%, #4a1147 45%, #120311 100%)",
-    flare: "radial-gradient(circle, #c724b1 0%, transparent 70%)",
-    format: "DYNAMIC CUT",
-    clientName: "Festa & Celebração",
-    clientHandle: "@aftermovie",
-    clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DaOVqd7xm74/",
     likes: "3.6k",
     comments: "210"
   }

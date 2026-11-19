@@ -93,6 +93,7 @@ const corporateVideos = [
     clientName: "AssisNet",
     clientHandle: "@assisnet",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DbOhwF_oWp8/",
     likes: "2.4k",
     comments: "142"
   },
@@ -111,6 +112,7 @@ const corporateVideos = [
     clientName: "AssisNet",
     clientHandle: "@assisnet",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DfXins6zCvr/",
     likes: "3.8k",
     comments: "286"
   },
@@ -129,6 +131,7 @@ const corporateVideos = [
     clientName: "Evento Summit",
     clientHandle: "@summitbrasil",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DY715pnpOU3/",
     likes: "1.9k",
     comments: "98"
   },
@@ -147,6 +150,7 @@ const corporateVideos = [
     clientName: "Bastidores Pro",
     clientHandle: "@bastidores",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DcZmC5UhD_O/",
     likes: "1.2k",
     comments: "64"
   },
@@ -165,6 +169,7 @@ const corporateVideos = [
     clientName: "Case Sucesso",
     clientHandle: "@casesucesso",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DU50AFvEalM/",
     likes: "2.1k",
     comments: "115"
   },
@@ -183,6 +188,7 @@ const corporateVideos = [
     clientName: "Impacto Reels",
     clientHandle: "@impactoreels",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DdUu-rOB7Of/",
     likes: "5.4k",
     comments: "420"
   },
@@ -201,6 +207,7 @@ const corporateVideos = [
     clientName: "Sede Corporativa",
     clientHandle: "@corporativo",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DbbqplHBgvE/",
     likes: "1.7k",
     comments: "82"
   },
@@ -219,6 +226,7 @@ const corporateVideos = [
     clientName: "Assistech",
     clientHandle: "@assistech",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DfQb3N_x32C/",
     likes: "3.2k",
     comments: "194"
   },
@@ -237,6 +245,7 @@ const corporateVideos = [
     clientName: "Time & Cultura",
     clientHandle: "@cultura",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/Dc14JmYRSNC/",
     likes: "1.5k",
     comments: "91"
   },
@@ -255,6 +264,7 @@ const corporateVideos = [
     clientName: "Assistech",
     clientHandle: "@assistech",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DbmFLtyRiT4/",
     likes: "2.8k",
     comments: "163"
   },
@@ -273,6 +283,7 @@ const corporateVideos = [
     clientName: "Transformação",
     clientHandle: "@transformacao",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DaxiLqxRnJS/",
     likes: "4.1k",
     comments: "250"
   },
@@ -291,6 +302,7 @@ const corporateVideos = [
     clientName: "Festa & Celebração",
     clientHandle: "@aftermovie",
     clientLogo: "",
+    instagramUrl: "https://www.instagram.com/reel/DaOVqd7xm74/",
     likes: "3.6k",
     comments: "210"
   }
