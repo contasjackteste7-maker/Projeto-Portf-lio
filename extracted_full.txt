@@ -1,0 +1,16 @@
+import json
+
+log_path = r"C:\Users\Assistech Online\.gemini\antigravity\brain\f5b813b5-8d6c-4286-a8b2-da28e222b8d3\.system_generated\logs\transcript_full.jsonl"
+
+with open(log_path, 'r', encoding='utf-8') as f:
+    for line in f:
+        data = json.loads(line)
+        calls = data.get('tool_calls', [])
+        for call in calls:
+            args = call.get('args', {})
+            cmd = args.get('CommandLine', '') or args.get('Content', '') or args.get('Replacement', '')
+            if '.video-grid-card {' in cmd:
+                print("FOUND in step:", data.get('step_index'), "tool:", call.get('name'))
+                with open("extracted_full.txt", "w", encoding="utf-8") as out:
+                    out.write(cmd)
+                break

@@ -1,0 +1,223 @@
+Created At: 2026-11-13T09:26:04-03:00
+Completed At: 2026-11-13T09:26:06-03:00
+Command exited with code 0.
+
+Command output:
+
+  style.css:75:   ========================================================================== */
+  style.css:76:
+> style.css:77:.video-gallery {
+  style.css:78:  padding: 110px 0 120px;
+  style.css:79:  position: relative;
+  style.css:80:  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  style.css:81:}
+  style.css:82:
+> style.css:83:.video-gallery::before {
+  style.css:84:  content: "";
+  style.css:85:  position: absolute;
+  style.css:86:  top: 0;
+  style.css:87:  left: 50%;
+  style.css:88:  transform: translateX(-50%);
+  style.css:95:}
+  style.css:96:
+> style.css:97:.video-gallery-header {
+  style.css:98:  position: relative;
+  style.css:99:  z-index: 1;
+  style.css:100:  text-align: center;
+  style.css:101:  max-width: 820px;
+  style.css:102:  margin: 0 auto 52px;
+  style.css:103:}
+  style.css:104:
+> style.css:105:.video-gallery-kicker .section-label {
+  style.css:106:  display: inline-block;
+  style.css:107:  font-size: 11px;
+  style.css:108:  letter-spacing: 2px;
+  style.css:109:  color: var(--grey-200);
+  style.css:110:  margin-bottom: 24px;
+  style.css:111:}
+  style.css:112:
+> style.css:113:.video-gallery-header h2 {
+  style.css:114:  font-size: clamp(34px, 4.4vw, 56px);
+  style.css:115:  line-height: 1.08;
+  style.css:116:  letter-spacing: -2px;
+  style.css:117:  font-weight: 600;
+  style.css:118:  margin: 0 0 24px;
+  style.css:120:}
+  style.css:121:
+> style.css:122:.video-gallery-header .research-copy {
+  style.css:123:  font-size: clamp(17px, 2vw, 21px);
+  style.css:124:  line-height: 1.55;
+  style.css:125:  color: #a0a0a0;
+  style.css:126:  margin: 0 auto 36px;
+  style.css:127:  max-width: 680px;
+  style.css:129:}
+  style.css:130:
+> style.css:131:.video-gallery-header .changing-title {
+  style.css:132:  display: inline-flex;
+  style.css:133:  align-items: center;
+  style.css:134:  justify-content: center;
+  style.css:135:  gap: 14px;
+  style.css:136:  font-size: clamp(20px, 2.6vw, 32px);
+  style.css:148:}
+  style.css:149:
+> style.css:150:.video-gallery-header .search-spark {
+  style.css:151:  width: 24px;
+  style.css:152:  height: 24px;
+  style.css:153:  color: #ff6363;
+  style.css:154:  display: flex;
+  style.css:155:  align-items: center;
+  style.css:158:}
+  style.css:159:
+> style.css:160:.video-gallery-header .search-spark svg {
+  style.css:161:  width: 20px;
+  style.css:162:  height: 20px;
+  style.css:163:  fill: #ff6363;
+  style.css:164:}
+  style.css:165:
+  style.css:166:/* Grid Layout: Compact, Elegant 3 Columns on PC */
+> style.css:167:.video-grid {
+  style.css:168:  position: relative;
+  style.css:169:  z-index: 1;
+  style.css:170:  display: grid;
+  style.css:171:  grid-template-columns: repeat(3, minmax(0, 1fr));
+  style.css:172:  gap: 28px 24px;
+  style.css:177:
+  style.css:178:@media (max-width: 980px) {
+> style.css:179:  .video-grid {
+  style.css:180:    grid-template-columns: repeat(2, minmax(0, 1fr));
+  style.css:181:    gap: 20px;
+  style.css:182:    max-width: 720px;
+  style.css:183:  }
+  style.css:184:}
+  style.css:185:
+  style.css:186:@media (max-width: 620px) {
+> style.css:187:  .video-grid {
+  style.css:188:    grid-template-columns: minmax(0, 1fr);
+  style.css:189:    gap: 24px;
+  style.css:190:    max-width: 330px;
+  style.css:191:    margin-left: auto;
+  style.css:192:    margin-right: auto;
+  style.css:195:
+  style.css:196:/* Raycast-Grade Smartphone / Reels Studio Card (Compact ~480px, NOT monolithic) */
+> style.css:197:.video-grid-card {
+  style.css:198:  position: relative;
+  style.css:199:  height: 440px;
+  style.css:200:  max-width: 315px;
+  style.css:201:  width: 100%;
+  style.css:202:  margin: 0 auto;
+  style.css:229:}
+  style.css:230:
+> style.css:231:.video-grid-card:hover {
+  style.css:232:  transform: translateY(-6px) scale(1.01);
+  style.css:233:  border-color: rgba(255, 255, 255, 0.28);
+  style.css:234:  box-shadow: 
+  style.css:235:    0 32px 70px rgba(0, 0, 0, 0.85),
+  style.css:236:    0 0 50px var(--card-glow, rgba(255, 99, 99, 0.3)),
+  style.css:238:}
+  style.css:239:
+> style.css:240:.video-grid-card:focus-visible {
+  style.css:241:  outline: 2px solid #ff6363;
+  style.css:242:  outline-offset: 4px;
+  style.css:243:}
+  style.css:244:
+  style.css:245:/* Ambient Radial Backlight */
+  style.css:254:}
+  style.css:255:
+> style.css:256:.video-grid-card:hover .card-ambient-glow {
+  style.css:257:  opacity: 1;
+  style.css:258:}
+  style.css:259:
+  style.css:260:/* The Screen Frame Inside the Card */
+  style.css:261:.card-screen-frame {
+  style.css:282:}
+  style.css:283:
+> style.css:284:.video-grid-card:hover .card-poster-art {
+  style.css:285:  transform: scale(1.03);
+  style.css:286:}
+  style.css:287:
+  style.css:288:.poster-lens-flare {
+  style.css:289:  position: absolute;
+  style.css:344:
+  style.css:345:/* Video Player */
+> style.css:346:.video-grid-player {
+  style.css:347:  position: absolute;
+  style.css:348:  inset: 0;
+  style.css:349:  width: 100%;
+  style.css:350:  height: 100%;
+  style.css:351:  object-fit: cover;
+  style.css:356:}
+  style.css:357:
+> style.css:358:.video-grid-card.is-playing .video-grid-player {
+  style.css:359:  opacity: 1;
+  style.css:360:  z-index: 2;
+  style.css:361:}
+  style.css:362:
+> style.css:363:.video-grid-card:hover .video-grid-player {
+  style.css:364:  transform: scale(1.03);
+  style.css:365:}
+  style.css:366:
+  style.css:367:/* Cinematic Gradient Overlay */
+  style.css:368:.card-media-overlay {
+  style.css:380:}
+  style.css:381:
+> style.css:382:.video-grid-card.is-playing .card-media-overlay {
+  style.css:383:  background: linear-gradient(180deg, 
+  style.css:384:    rgba(8, 9, 11, 0.5) 0%, 
+  style.css:385:    transparent 20%, 
+  style.css:386:    transparent 60%, 
+  style.css:387:    rgba(8, 9, 11, 0.92) 100%
+  style.css:424:}
+  style.css:425:
+> style.css:426:.video-grid-card.is-playing .rec-dot {
+  style.css:427:  background: #ff453a;
+  style.css:428:  box-shadow: 0 0 8px #ff453a;
+  style.css:429:  animation: recPulse 1.2s infinite;
+  style.css:430:}
+  style.css:431:
+  style.css:491:}
+  style.css:492:
+> style.css:493:.video-grid-card:hover .screen-play-btn {
+  style.css:494:  transform: scale(1.14);
+  style.css:495:  background: rgba(255, 255, 255, 0.28);
+  style.css:496:  border-color: rgba(255, 255, 255, 0.6);
+  style.css:497:  box-shadow: 
+  style.css:498:    0 16px 36px rgba(0, 0, 0, 0.65),
+  style.css:511:}
+  style.css:512:
+> style.css:513:.video-grid-card.is-playing .screen-play-btn {
+  style.css:514:  opacity: 0;
+  style.css:515:  pointer-events: none;
+  style.css:516:  transform: scale(0.85);
+  style.css:517:}
+  style.css:518:
+> style.css:519:.video-grid-card.is-playing:hover .screen-play-btn {
+  style.css:520:  opacity: 0.95;
+  style.css:521:  pointer-events: auto;
+  style.css:522:  transform: scale(1);
+  style.css:523:}
+  style.css:524:
+  style.css:653:}
+  style.css:654:
+> style.css:655:.video-grid-card.is-playing .wave-bars span {
+  style.css:656:  background: #2ed469;
+  style.css:657:  animation: waveBounce 0.8s ease-in-out infinite alternate;
+  style.css:658:}
+  style.css:659:
+> style.css:660:.video-grid-card.is-playing .wave-bars span:nth-child(2) { animation-delay: 0.15s; }
+> style.css:661:.video-grid-card.is-playing .wave-bars span:nth-child(3) { animation-delay: 0.3s; }
+> style.css:662:.video-grid-card.is-playing .wave-bars span:nth-child(4) { animation-delay: 0.45s; }
+  style.css:663:
+  style.css:664:@keyframes waveBounce {
+  style.css:665:  0% { height: 2px; }
+  style.css:666:  100% { height: 10px; }
+  style.css:667:}
+  style.css:686:
+  style.css:687:/* Load More Button Area */
+> style.css:688:.video-gallery-actions {
+  style.css:689:  position: relative;
+  style.css:690:  z-index: 1;
+  style.css:691:  display: flex;
+  style.css:692:  justify-content: center;
+  style.css:693:  align-items: center;
+
+

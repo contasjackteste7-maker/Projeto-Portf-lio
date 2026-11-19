@@ -1,0 +1,1 @@
+Abra index.html no navegador. Edite index.html, style.css e app.js. Mídias e logos em assets são demonstrativos. O perfil e o crescimento de seguidores são uma simulação visual.
