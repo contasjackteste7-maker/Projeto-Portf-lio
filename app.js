@@ -31,7 +31,16 @@ const swapHeroIcon=heroIconButtons.map((button,index)=>{
 heroIconButtons.forEach((button,index)=>button.onclick=swapHeroIcon[index]);
 if(!reduced){let nextSlot=0;setTimeout(()=>{swapHeroIcon[nextSlot]();nextSlot=(nextSlot+1)%swapHeroIcon.length;setInterval(()=>{swapHeroIcon[nextSlot]();nextSlot=(nextSlot+1)%swapHeroIcon.length},1700)},3200)}
 const dialog=document.querySelector('#detail');function openDialog(title,html){document.querySelector('#dialogTitle').textContent=title;document.querySelector('#dialogBody').innerHTML=html;dialog.showModal()}dialog.querySelector('.close').onclick=()=>dialog.close();dialog.onclick=e=>{if(e.target===dialog){const r=dialog.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)dialog.close()}};
-document.querySelectorAll('[data-dialog]').forEach(b=>b.onclick=()=>openDialog(b.dataset.dialog || 'Pedir orçamento','<p>Conte o que sua empresa faz, o que precisa mostrar e onde pretende publicar o vídeo.</p><p>Contato demonstrativo: seu WhatsApp ou e-mail será adicionado aqui.</p><a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="_3dJGfa_button _3dJGfa_light">Conversar no WhatsApp →</a>'));
+document.querySelectorAll('[data-dialog]').forEach(b=>{
+  if (b.dataset.dialog === 'Pedir orçamento' || !b.dataset.dialog) {
+    b.onclick = (e) => {
+      e.preventDefault();
+      window.open('https://wa.me/5554996509183?text=Ol%C3%A1!%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20de%20v%C3%ADdeo.', '_blank');
+    };
+  } else {
+    b.onclick = () => openDialog(b.dataset.dialog, '<p>Conte o que sua empresa faz, o que precisa mostrar e onde pretende publicar o vídeo.</p><a href="https://wa.me/5554996509183?text=Ol%C3%A1!%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20de%20v%C3%ADdeo." target="_blank" rel="noopener noreferrer" class="_3dJGfa_button _3dJGfa_light">Conversar no WhatsApp →</a>');
+  }
+});
 const b2Videos = [
   "videos/SaveClip.App_AQMNVo8LajO0LJTSY76RRJEGqHnQeqsG9ugyp2D5T7xlOkdE1ocT4ehV5aVNQGr57WGZajNi6O3ZMVlQoqjsZ0TwzL6j8qWxJYjbg_s.mp4",
   "videos/SaveClip.App_AQMN_ghxUvwuqApzkIr-Z6b-ZYvc-bKBCTmHtCIuyuzfUqMny-HWB6WQKY-u-pjfTT9Iq-olPr1S9FWYQpC3Yox8goeZYi5PqMGMhgk.mp4",
@@ -568,7 +577,7 @@ if(!reduced&&'IntersectionObserver' in window){
  }
 }
 
-const heroContact=document.querySelector('.hero [data-dialog]');if(heroContact)heroContact.onclick=()=>openDialog('Pedir orçamento','<p>Me conte sobre seu negócio e o vídeo que você tem em mente. Vamos conversar sobre formato, produção e orçamento.</p><p>Este é um contato demonstrativo. Seu WhatsApp ou e-mail poderá ser vinculado aqui.</p><a href="https://wa.me/" target="_blank" rel="noopener noreferrer" class="_3dJGfa_button _3dJGfa_light">Conversar no WhatsApp →</a>');
+const heroContact=document.querySelector('.hero [data-dialog]');if(heroContact)heroContact.onclick=()=>window.open('https://wa.me/5554996509183?text=Ol%C3%A1!%20Gostaria%20de%20pedir%20um%20or%C3%A7amento%20de%20v%C3%ADdeo.', '_blank');
 
 // Illustrative follower count grows continuously throughout page visit
 (()=>{
