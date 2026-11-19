@@ -46,7 +46,7 @@ export default defineNuxtConfig({
       htmlAttrs: {
         lang: 'pt-BR'
       },
-      title: '4k Creative — Vídeos empresariais e Instagram',
+      title: 'FRAME — Vídeos empresariais e Instagram',
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },

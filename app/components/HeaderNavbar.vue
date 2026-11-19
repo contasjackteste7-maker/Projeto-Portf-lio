@@ -71,8 +71,8 @@ onUnmounted(() => {
   >
     <div class="pSp8Ga_navbar">
       <div class="pSp8Ga_logoContainer">
-        <a href="#" class="pSp8Ga_brand" aria-label="4k Creative Início" @click="closeMenu">
-          <span class="pSp8Ga_brandFull">4k Creative</span>
+        <a href="#" class="pSp8Ga_brand" aria-label="FRAME Início" @click="closeMenu">
+          <span class="pSp8Ga_brandFull">FRAME</span>
         </a>
         <button
           id="navToggle"

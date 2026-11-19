@@ -1,6 +1,6 @@
 <template>
   <footer class="container">
-    <span aria-label="4k Creative" class="footer-word">4K CREATIVE</span>
+    <span aria-label="FRAME" class="footer-word">FRAME</span>
     <div>
       <span>Vídeos empresariais e conteúdo para Instagram</span>
       <a href="#" @click.prevent="scrollToTop">Voltar ao topo ↑</a>
