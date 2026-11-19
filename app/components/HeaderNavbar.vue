@@ -72,13 +72,6 @@ onUnmounted(() => {
     <div class="pSp8Ga_navbar">
       <div class="pSp8Ga_logoContainer">
         <a href="#" class="pSp8Ga_brand" aria-label="4k Creative Início" @click="closeMenu">
-          <div class="pSp8Ga_brandIcon" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect x="2" y="2" width="20" height="20" rx="5.5" fill="#FF6363" />
-              <path d="M7 9.5V7h2.5M17 9.5V7h-2.5M7 14.5V17h2.5M17 14.5V17h-2.5" stroke="#ffffff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
-              <circle cx="12" cy="12" r="1.8" fill="#ffffff" />
-            </svg>
-          </div>
           <span class="pSp8Ga_brandFull">4k Creative</span>
         </a>
         <button

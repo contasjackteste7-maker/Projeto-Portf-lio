@@ -195,12 +195,6 @@ onUnmounted(() => {
                 <span><b>9</b> publicações</span>
                 <span class="ig-follower-stat">
                   <b id="simFollowerCount">{{ formatNumber(followerCount) }}</b> seguidores
-                  <span v-if="gainedCount > 0" class="ig-growth" title="Crescimento contínuo ao vivo">
-                    <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M18 15l-6-6-6 6"/>
-                    </svg>
-                    <span>+{{ gainedCount }}</span>
-                  </span>
                 </span>
                 <span><b>386</b> seguindo</span>
               </div>

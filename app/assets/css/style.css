@@ -593,13 +593,13 @@ dialog{background:#191919;color:#f5f5f5}dialog::backdrop{background:#000c}#dialo
   }
 
   .video-grid-card .screen-play-btn {
-    width: 46px;
-    height: 46px;
+    width: 48px;
+    height: 48px;
   }
 
   .video-grid-card .screen-play-btn svg {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
   }
 
   .video-grid-card .screen-reels-actions {
@@ -1073,11 +1073,15 @@ dialog{background:#191919;color:#f5f5f5}dialog::backdrop{background:#000c}#dialo
 }
 
 .video-grid-card .screen-play-btn svg {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
   fill: #ffffff;
-  transform: translateX(1.5px);
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
+  display: block;
+  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.45));
+}
+
+.video-grid-card .play-icon {
+  margin: 0 !important;
 }
 
 .video-grid-card.is-playing .screen-play-container,
@@ -1172,14 +1176,6 @@ dialog{background:#191919;color:#f5f5f5}dialog::backdrop{background:#000c}#dialo
 .video-grid-card.is-playing .screen-sound-hud .wave-bars span:nth-child(3) { animation-delay: 0.3s; }
 .video-grid-card.is-playing .screen-sound-hud .wave-bars span:nth-child(4) { animation-delay: 0.45s; }
 
-.video-grid-card .screen-play-btn svg {
-  width: 22px;
-  height: 22px;
-}
-
-.video-grid-card .play-icon {
-  margin-left: 2px;
-}
 
 .video-grid-card .screen-reels-actions {
   position: absolute;
@@ -2200,7 +2196,7 @@ dialog{background:#191919;color:#f5f5f5}dialog::backdrop{background:#000c}#dialo
 @keyframes hero-tail-expand{from{width:0}to{width:.95em}}
 @media(prefers-reduced-motion:reduce){.hero .line:first-child .slot{width:.95em}}
 
-.profile-intro{padding:88px 0 46px;text-align:center;max-width:850px}.profile-intro h2{font-size:clamp(30px,4vw,50px);line-height:1.1;letter-spacing:-1.7px;margin:0 0 22px}.profile-intro>p{max-width:640px;margin:0 auto;color:#aaa;line-height:1.7;font-size:17px}.ig-follower-stat{position:relative}.ig-stats #simFollowerCount{display:inline-block;min-width:4.3ch;font-variant-numeric:tabular-nums}.ig-stats .ig-growth{display:inline-flex;align-items:center;gap:3px;margin-left:8px;padding:2.5px 8px;border-radius:20px;background:rgba(46, 212, 105, 0.16);color:#2ed469;border:1px solid rgba(46, 212, 105, 0.28);font-size:11px;font-weight:600;white-space:nowrap;transition:all 0.3s ease}.ig-growth span{font-variant-numeric:tabular-nums}.ig-avatar{background:#111216!important;color:#ffffff!important;border-color:#1c1d24!important}.ig-avatar span{color:#FF6363!important}.ig-user-row .ig-follow{background:#FF6363!important;color:#ffffff!important;border:none!important}.ig-user-row .ig-follow:hover{background:#ff4747!important}.ig-verified{background:#FF6363!important;color:#ffffff!important}.ig-bio-link{color:#FF6363!important}.ig-highlight>span{background:#16171e!important;border-color:rgba(255,255,255,0.12)!important;color:#ffffff!important}.ig-highlight:hover>span{border-color:#FF6363!important;color:#FF6363!important;box-shadow:inset 0 0 0 3px #0e0e0e, 0 0 16px rgba(255,99,99,0.4)!important}.ig-tabs button.active{color:#FF6363!important;border-color:#FF6363!important}/* Instagram Profile Demo: Feed Harmonioso & Coeso nas cores da FRAME */
+.profile-intro{padding:88px 0 46px;text-align:center;max-width:850px}.profile-intro h2{font-size:clamp(30px,4vw,50px);line-height:1.1;letter-spacing:-1.7px;margin:0 0 22px}.profile-intro>p{max-width:640px;margin:0 auto;color:#aaa;line-height:1.7;font-size:17px}.ig-follower-stat{position:relative}.ig-stats #simFollowerCount{display:inline-block;min-width:4.3ch;font-variant-numeric:tabular-nums}.ig-stats .ig-growth{display:none !important}.ig-growth span{font-variant-numeric:tabular-nums}.ig-avatar{background:#111216!important;color:#ffffff!important;border-color:#1c1d24!important}.ig-avatar span{color:#FF6363!important}.ig-user-row .ig-follow{background:#FF6363!important;color:#ffffff!important;border:none!important}.ig-user-row .ig-follow:hover{background:#ff4747!important}.ig-verified{background:#FF6363!important;color:#ffffff!important}.ig-bio-link{color:#FF6363!important}.ig-highlight>span{background:#16171e!important;border-color:rgba(255,255,255,0.12)!important;color:#ffffff!important}.ig-highlight:hover>span{border-color:#FF6363!important;color:#FF6363!important;box-shadow:inset 0 0 0 3px #0e0e0e, 0 0 16px rgba(255,99,99,0.4)!important}.ig-tabs button.active{color:#FF6363!important;border-color:#FF6363!important}/* Instagram Profile Demo: Feed Harmonioso & Coeso nas cores da FRAME */
 .ig-post {
   display: flex !important;
   flex-direction: column !important;

@@ -208,7 +208,7 @@ const onVideoEnded = (index: number) => {
               @click.stop="togglePlay(index)"
             >
               <svg class="play-icon" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M8 5.14v13.72a1 1 0 0 0 1.5.86l11.5-6.86a1 1 0 0 0 0-1.72L9.5 4.28A1 1 0 0 0 8 5.14z"/>
+                <path d="M8.5 6.4c0-.98 1.07-1.59 1.92-1.1l9.6 5.6c.85.5.85 1.7 0 2.2l-9.6 5.6c-.85.5-1.92-.12-1.92-1.1V6.4z"/>
               </svg>
             </button>
           </div>
